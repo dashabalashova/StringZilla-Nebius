@@ -1,4 +1,4 @@
-# StringZilla: GPU-accelerated sequence processing
+# StringZilla: GPU-accelerated string processing
 
 | **Long story short** | **StringZilla** |
 |---|---|
