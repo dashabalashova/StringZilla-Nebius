@@ -39,14 +39,14 @@ NLTK – despite >1B downloads – only manages \~2 MCUPS. RapidFuzz (Python) is
 
 Needleman-Wunsch and Smith-Waterman are better suited for biological sequences because they let you use custom substitution scores (e.g., BLOSUM/PAM). It’s also common to adopt Gotoh’s affine-gap model (gap-open + gap-extend) to more realistically represent indel events in DNA and protein evolution.
 
-Compared with Biopython’s PairwiseAligner.score on 1x SPR (95 MCUPS for \~100-byte lines and 557 MCUPS for \~1,000-byte lines), StringZilla’s SmithWatermanScores batch on 16x SPR hits 3,535 MCUPS on \~100-byte lines — about 37x faster; StringZilla’s SmithWatermanScores batch on H100 reaches 12,702 MCUPS on \~1,000-byte lines — about 23x faster.
+Compared with Biopython’s PairwiseAligner.score on 1x SPR (95 MCUPS for \~100-byte lines and 557 MCUPS for \~1,000-byte lines), StringZilla’s SmithWatermanScores batch on 16x SPR hits 3,535 MCUPS on \~100-byte lines – about 37x faster; StringZilla’s SmithWatermanScores batch on H100 reaches 12,702 MCUPS on \~1,000-byte lines – about 23x faster.
 
 ![Combined MCUPS 2x2 overview – Rust/Python x \~100B/\~1kB](graphs/substitution_bench_grouped_nebius.png)
-*Figure: Comparative MCUPS (log scale) for substitution edit distance: Rust (linear gaps) / Python (linear gaps) / Rust (affine gaps), \~100-byte and \~1,000-byte workloads, measured on CPU nodes and GPUs.*
+*Figure: Comparative MCUPS (log scale) for substitution edit distance: Rust (linear gaps) / Python (linear gaps) / Rust (affine gaps), \~100-byte and \~1,000-byte workloads, measured on CPU nodes and GPUs. Bioptyhon: biopython.PairwiseAligner.score, NW: stringzillas::NeedlemanWunschScores, SW: stringzillas::SmithWatermanScores.*
 
 ## Infrastructure and reproducibility
 
-The benchmarks were run on Nebius cloud GPU instances provisioned with NVIDIA H100 accelerators. Local CPU baselines were measured on Intel Sapphire Rapids cores and comparisons were made against AMD Zen4 in microbenchmarks where relevant. CUDA-enabled toolchains and platform-specific wheels were built and deployed via GitHub Actions to ensure consistent runtime environments across machines. RAPIDS (`cudf` / `nvtext`) was used as a representative GPU-enabled comparison stack and Biopython was used as a representative single-core CPU baseline for protein alignment workloads.
+The benchmarks were run on Nebius cloud GPU instances provisioned with Nvidia Hopper-based H100 and Blackwell-based RTX 6000 Pro GPUs. CPU baselines were measured on Intel Sapphire Rapids (SNR) and Granite Rapids (GNR) CPUs. CUDA-enabled toolchains and platform-specific wheels were built and deployed via GitHub Actions to ensure consistent runtime environments across machines. RAPIDS (`cudf` / `nvtext`) was used as a representative GPU-enabled comparison stack and Biopython was used as a representative single-core CPU baseline for protein alignment workloads.
 
 ## Future roadmap and next steps
 
