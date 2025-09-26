@@ -42,7 +42,7 @@ Needleman-Wunsch and Smith-Waterman are better suited for biological sequences b
 Compared with Biopython’s PairwiseAligner.score on 1x SPR (95 MCUPS for \~100-byte lines and 557 MCUPS for \~1,000-byte lines), StringZilla’s SmithWatermanScores batch on 16x SPR hits 3,535 MCUPS on \~100-byte lines – about 37x faster; StringZilla’s SmithWatermanScores batch on H100 reaches 12,702 MCUPS on \~1,000-byte lines – about 23x faster.
 
 ![Combined MCUPS 2x2 overview – Rust/Python x \~100B/\~1kB](graphs/graph2_v3.1.png)
-*Figure: Comparative MCUPS (log scale) for substitution edit distance: Rust (linear gaps) / Python (linear gaps) / Rust (affine gaps), \~100-byte and \~1,000-byte workloads, measured on CPU nodes and GPUs. Bioptyhon: biopython.PairwiseAligner.score, NW: stringzillas::NeedlemanWunschScores, SW: stringzillas::SmithWatermanScores.*
+*Figure: Comparative MCUPS (log scale) for substitution edit distance: Python (linear gaps), \~100-byte and \~1,000-byte workloads, measured on CPU nodes and GPUs. Bioptyhon: biopython.PairwiseAligner.score, NW: stringzillas::NeedlemanWunschScores, SW: stringzillas::SmithWatermanScores.*
 
 ## Infrastructure and reproducibility
 
