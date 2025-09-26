@@ -8,7 +8,7 @@
 
 Massive sequence comparison workloads (read alignment, long-read error detection, protein similarity searches, deduplication and large-scale variant matching) were identified as direct beneficiaries of the library’s GPU kernels. For bioinformatics pipelines that compute a large number of pairwise dynamic programming (DP) scores or perform local alignments (Smith-Waterman) with affine-gap penalties, DP evaluation is the main computational bottleneck - moving these kernels to GPUs removes that bottleneck while preserving biologically meaningful scoring (substitution matrices and affine-gap penalties). This makes exploratory analyses (large-scale pairwise similarity, proteome-scale scans, and library deduplication) dramatically faster.
 
-## Algorithm implementation and optimizations
+## Algorithm implementation and optimization
 
 SZv4's GPU optimization is based on re-ordering DP along anti-diagonals to expose massive SIMD/GPU parallelism, leveraging accelerator primitives (e.g., DP4A/DPX) and diagonal-tiling/masked-load techniques for affine-gap alignments, and keeping those alignment kernels separate from a distinct high-throughput fingerprinting pillar (AES-based streaming hashing, vector-friendly 52-bit MinHash) plus a set of string utilities (fast hashing, prefix-based sort/argsort).
 
