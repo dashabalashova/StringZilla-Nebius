@@ -32,7 +32,7 @@ For \~1,000-byte lines, `rapidfuzz::levenshtein<Bytes>` delivers 14,316 MCUPS. T
 
 NLTK – despite >1B downloads – only manages \~2 MCUPS. RapidFuzz (Python) is faster; StringZilla’s very thin C->Python bindings keep overhead minimal and push performance close to native. With prebuilt cudf.Series, cudf.edit_distance scores 24,754 / 6,976 / 1,447 MCUPS for \~100 / 1,000 / 10,000-byte strings, while StringZilla Python scores 18,081 / 320,109 / 157,968 MCUPS – roughly 46x faster at \~1,000 bytes and 109x faster at \~10,000 bytes versus cudf.
 
-![Combined MCUPS 2x2 overview – Rust/Python x \~100B/\~1kB](graphs_v3/graph1_v3.png)
+![Combined MCUPS 2x2 overview – Rust/Python x \~100B/\~1kB](graphs/graph1_v3.png)
 *Figure: Comparative MCUPS (log scale) for edit distance: Rust / Python, \~100-byte and \~1,000-byte workloads, measured on CPU nodes and GPUs.*
 
 ### Substitution Costs and Affine Gap Penalties
@@ -41,7 +41,7 @@ Needleman-Wunsch and Smith-Waterman are better suited for biological sequences b
 
 Compared with Biopython’s PairwiseAligner.score on 1x SPR (95 MCUPS for \~100-byte lines and 557 MCUPS for \~1,000-byte lines), StringZilla’s SmithWatermanScores batch on 16x SPR hits 3,535 MCUPS on \~100-byte lines – about 37x faster; StringZilla’s SmithWatermanScores batch on H100 reaches 12,702 MCUPS on \~1,000-byte lines – about 23x faster.
 
-![Combined MCUPS 2x2 overview – Rust/Python x \~100B/\~1kB](graphs_v3/graph2_v3.png)
+![Combined MCUPS 2x2 overview – Rust/Python x \~100B/\~1kB](graphs/graph2_v3.png)
 *Figure: Comparative MCUPS (log scale) for substitution edit distance: Rust (linear gaps) / Python (linear gaps) / Rust (affine gaps), \~100-byte and \~1,000-byte workloads, measured on CPU nodes and GPUs. Bioptyhon: biopython.PairwiseAligner.score, NW: stringzillas::NeedlemanWunschScores, SW: stringzillas::SmithWatermanScores.*
 
 ## Infrastructure and reproducibility
