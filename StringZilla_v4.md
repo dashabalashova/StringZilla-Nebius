@@ -28,7 +28,7 @@ SZv4 also ships high-throughput GP string utilities (fast hashing, prefix-based 
 
 ### Edit Distance
 
-Edit distance computation is widely used in search engines, data cleaning, natural language processing, and bioinformatics. It’s computationally intensive—typically implemented with dynamic programming and a worst-case quadratic time complexity. For \~1,000-byte lines in Rust, StringZilla’s implementation outperforms `rapidfuzz::levenshtein<Bytes>` by roughly 63x on an RTX6000 and 65x on an H100.
+Edit distance computation is widely used in search engines, data cleaning, natural language processing, and bioinformatics. It’s computationally intensive – typically implemented with dynamic programming and a worst-case quadratic time complexity. For \~1,000-byte lines in Rust, StringZilla’s implementation outperforms `rapidfuzz::levenshtein<Bytes>` by roughly 63x on an RTX6000 and 65x on an H100.
 
 NLTK – despite >1B downloads – only manages \~2 MCUPS. RapidFuzz (Python) is faster; StringZilla’s very thin C->Python bindings keep overhead minimal and push performance close to native. With prebuilt cudf.Series, cudf.edit_distance scores 24,754 / 6,976 / 1,447 MCUPS for \~100 / 1,000 / 10,000-byte strings, while StringZilla Python scores 18,081 / 320,109 / 157,968 MCUPS – roughly 46x faster at \~1,000 bytes and 109x faster at \~10,000 bytes versus cudf.
 
